@@ -6,7 +6,7 @@
 /*   By: jazevedo <jazevedo@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/16 16:23:25 by jazevedo          #+#    #+#             */
-/*   Updated: 2024/04/17 18:44:11 by jazevedo         ###   ########.fr       */
+/*   Updated: 2024/04/18 15:45:23 by jazevedo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,25 +28,38 @@
 # define RESET	7
 # define CLEAR	8
 
+# define ERROR_ARGS "Error! Invalid Arguments.\n\t-> "
+# define POSITIVE_VALUES "\t\tAll Values Must Be Positives."
 # define USAGE "Usage: (Philosophers) (Die) (Eat) (Sleep) [Must Eat]."
-# define ERROR_ARGS "Error! Invalid Arguments."
-/*
-typedef struct s_table
-{
-	int	philo;
-	s_table	*next;
-}	t_table;
+# define ONLY_NB "'[]' = Is Optional. All Arguments Must Be A Number."
+# define OVERFLOW "Overflow: All Values Must Be An INT."
+# define MAX_PHILO "ARGV[1]: Max Number Of Philosphers Is 200."
+# define MIN_PHILO "\t\tMin Number Of Philosophers Is 1."
 
+//----------| MAIN STRUCT |----------//
 typedef struct s_philo
 {
-	t_table	*table;
+	int	nb_philo;
+	int	to_die;
+	int	to_eat;
+	int	to_sleep;
+	int	must_eat;
 }	t_philo;
-*/
+
+//----------| ARGUMENTS |----------//
+int	invalid_arguments(int argc, char **argv);
 
 //----------| ERRORS |----------//
 int	error_number_arguments(void);
+int	error_only_number(void);
+int	error_overflow(void);
+int	error_philosophers(void);
 
 //----------| COLORS |----------//
 void	paint(int color);
+
+//----------| UTILS |----------//
+size_t	ft_strlen(const char *str);
+long	ft_atol(const char *nptr);
 
 #endif //| PHILOSOPHERS
