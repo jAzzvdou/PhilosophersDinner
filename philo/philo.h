@@ -6,7 +6,7 @@
 /*   By: jazevedo <jazevedo@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/16 16:23:25 by jazevedo          #+#    #+#             */
-/*   Updated: 2024/04/19 18:57:24 by jazevedo         ###   ########.fr       */
+/*   Updated: 2024/04/19 19:25:18 by jazevedo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@
 # define ERROR_ARGS "Error! Invalid Arguments.\n\t-> "
 # define POSITIVE_VALUES "\t\tAll Values Must Be Positives > 0."
 # define USAGE "Usage: (Philosophers) (Die) (Eat) (Sleep) [Must Eat]."
-# define ONLY_NB "'[]' = Is Optional. All Arguments Must Be A Number."
+# define ONLY_NB "[Must Eat] Is Optional. All Arguments Must Be A Number."
 # define OVERFLOW "Overflow: All Values Must Be An INT."
 # define NB_PHILO "ARGV[1]: Max Number Of Philosphers Is 200."
 # define VALUE_DIE "ARGV[2] Value: Max = INT_MAX && MIN = 60."
@@ -40,8 +40,8 @@
 # define VALUE_SLEEP "ARGV[4] Value: Max = INT_MAX && MIN = 60."
 # define VALUE_MUST_EAT "ARGV[5] Value: Max = INT_MAX && MIN = 1."
 
-
 //----------| PHILOSOPHERS STRUCT |----------//
+/*
 typedef struct s_table
 {
 	int	id;
@@ -49,7 +49,7 @@ typedef struct s_table
 	int	eaten;
 	s_table	*next;
 }		t_table;
-
+*/
 //----------| MAIN STRUCT |----------//
 typedef struct s_philo
 {
@@ -59,9 +59,10 @@ typedef struct s_philo
 	int		to_sleep;
 	int		must_eat;
 	int		tid;
+	int		color;
 	pthread_t	thread;
 	pthread_mutex_t	mutex;
-	t_table		*table;
+	//t_table		*table;
 }			t_philo;
 
 //----------| ARGUMENTS |----------//

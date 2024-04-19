@@ -6,21 +6,55 @@
 /*   By: jazevedo <jazevedo@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/17 15:41:25 by jazevedo          #+#    #+#             */
-/*   Updated: 2024/04/19 18:43:59 by jazevedo         ###   ########.fr       */
+/*   Updated: 2024/04/19 19:32:43 by jazevedo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
+int	make_color(int c, int min, int max)
+{
+	int		red;
+	int		green;
+	int		blue;
+	float	calc;
+
+	if (c == 0)
+		return (0x00FF00);
+	else if (c > 0 && c <= max)
+	{
+		calc = (float)c / max;
+		red = 255 * calc;
+		green = 255 - red;
+		blue = 0;
+		return ((red << 16) | (green << 8) | blue);
+	}
+	else if (c < 0 && c >= min)
+	{
+		calc = (float)c / min;
+		blue = 255 * calc;
+		green = 255 - blue;
+		red = 0;
+		return ((red << 16) | (green << 8) | blue);
+	}
+	else
+		return (0x000000);
+}
+
 void	*print_thread(void *thread)
 {
-	t_philo *philo;
+	int		color;
+	t_philo	*philo;
 
 	philo = (t_philo *)thread;
 	pthread_mutex_lock(&(philo->mutex));
-	paint(GREEN);
+	color = make_color(philo->color, -((philo->nb_philo) / 2),
+			(philo->nb_philo / 2));
+	printf("\033[38;2;%d;%d;%dm", (color >> 16) & 0xFF,
+		(color >> 8) & 0xFF, color & 0xFF);
 	printf("Você criou a Thread [%d]!\n", philo->tid);
 	philo->tid++;
+	philo->color++;
 	pthread_mutex_unlock(&(philo->mutex));
 	pthread_exit(NULL);
 }
@@ -28,6 +62,7 @@ void	*print_thread(void *thread)
 int	start_philo(t_philo *philo, char **argv)
 {
 	philo->nb_philo = ft_atol(argv[1]);
+	philo->color = -((philo->nb_philo) / 2);
 	philo->to_die = ft_atol(argv[2]);
 	philo->to_eat = ft_atol(argv[3]);
 	philo->to_sleep = ft_atol(argv[4]);
@@ -53,18 +88,12 @@ int	main(int argc, char **argv)
 		return (1);
 	pthread_mutex_init(&philo.mutex, NULL); // INICIAR A MUTEX.
 	pthread_t *thread = malloc(sizeof(pthread_t) * philo.nb_philo);
-	long i = 0;
-	while (i < philo.nb_philo)
-	{
+	long i = -1;
+	while (++i < philo.nb_philo)
 		pthread_create(&thread[i], NULL, print_thread, (void *)&philo);
-		i++;
-	}
-	i = 0;
-	while (i < philo.nb_philo)
-	{
+	i = -1;
+	while (++i < philo.nb_philo)
 		pthread_join(thread[i], NULL);
-		i++;
-	}
 	pthread_mutex_destroy(&(philo.mutex)); // DESTRUIR MUTEX
 	return (0);
 }
