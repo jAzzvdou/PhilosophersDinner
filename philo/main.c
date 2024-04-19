@@ -6,7 +6,7 @@
 /*   By: jazevedo <jazevedo@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/17 15:41:25 by jazevedo          #+#    #+#             */
-/*   Updated: 2024/04/19 17:07:16 by jazevedo         ###   ########.fr       */
+/*   Updated: 2024/04/19 18:43:59 by jazevedo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,14 @@
 
 void	*print_thread(void *thread)
 {
-	long id = (long)thread;
+	t_philo *philo;
+
+	philo = (t_philo *)thread;
+	pthread_mutex_lock(&(philo->mutex));
 	paint(GREEN);
-	printf("Você criou a Thread [%ld]!\n", id);
+	printf("Você criou a Thread [%d]!\n", philo->tid);
+	philo->tid++;
+	pthread_mutex_unlock(&(philo->mutex));
 	pthread_exit(NULL);
 }
 
@@ -46,13 +51,12 @@ int	main(int argc, char **argv)
 		return (1);
 	if (!start_philo(&philo, argv))
 		return (1);
-
-	//| THREADS TEST
+	pthread_mutex_init(&philo.mutex, NULL); // INICIAR A MUTEX.
 	pthread_t *thread = malloc(sizeof(pthread_t) * philo.nb_philo);
 	long i = 0;
 	while (i < philo.nb_philo)
 	{
-		pthread_create(&thread[i], NULL, print_thread, (void *)i);
+		pthread_create(&thread[i], NULL, print_thread, (void *)&philo);
 		i++;
 	}
 	i = 0;
@@ -61,6 +65,6 @@ int	main(int argc, char **argv)
 		pthread_join(thread[i], NULL);
 		i++;
 	}
-
+	pthread_mutex_destroy(&(philo.mutex)); // DESTRUIR MUTEX
 	return (0);
 }

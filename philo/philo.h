@@ -6,7 +6,7 @@
 /*   By: jazevedo <jazevedo@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/16 16:23:25 by jazevedo          #+#    #+#             */
-/*   Updated: 2024/04/19 16:57:13 by jazevedo         ###   ########.fr       */
+/*   Updated: 2024/04/19 18:57:24 by jazevedo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,16 @@
 # define VALUE_SLEEP "ARGV[4] Value: Max = INT_MAX && MIN = 60."
 # define VALUE_MUST_EAT "ARGV[5] Value: Max = INT_MAX && MIN = 1."
 
+
+//----------| PHILOSOPHERS STRUCT |----------//
+typedef struct s_table
+{
+	int	id;
+	int	fork;
+	int	eaten;
+	s_table	*next;
+}		t_table;
+
 //----------| MAIN STRUCT |----------//
 typedef struct s_philo
 {
@@ -48,8 +58,11 @@ typedef struct s_philo
 	int		to_eat;
 	int		to_sleep;
 	int		must_eat;
+	int		tid;
 	pthread_t	thread;
-}	t_philo;
+	pthread_mutex_t	mutex;
+	t_table		*table;
+}			t_philo;
 
 //----------| ARGUMENTS |----------//
 int	invalid_arguments(int argc, char **argv);
