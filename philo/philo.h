@@ -6,7 +6,7 @@
 /*   By: jazevedo <jazevedo@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/16 16:23:25 by jazevedo          #+#    #+#             */
-/*   Updated: 2024/04/18 15:45:23 by jazevedo         ###   ########.fr       */
+/*   Updated: 2024/04/19 16:57:13 by jazevedo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,22 +28,27 @@
 # define RESET	7
 # define CLEAR	8
 
+//----------| ARGUMENTS ERRORS |----------//
 # define ERROR_ARGS "Error! Invalid Arguments.\n\t-> "
-# define POSITIVE_VALUES "\t\tAll Values Must Be Positives."
+# define POSITIVE_VALUES "\t\tAll Values Must Be Positives > 0."
 # define USAGE "Usage: (Philosophers) (Die) (Eat) (Sleep) [Must Eat]."
 # define ONLY_NB "'[]' = Is Optional. All Arguments Must Be A Number."
 # define OVERFLOW "Overflow: All Values Must Be An INT."
-# define MAX_PHILO "ARGV[1]: Max Number Of Philosphers Is 200."
-# define MIN_PHILO "\t\tMin Number Of Philosophers Is 1."
+# define NB_PHILO "ARGV[1]: Max Number Of Philosphers Is 200."
+# define VALUE_DIE "ARGV[2] Value: Max = INT_MAX && MIN = 60."
+# define VALUE_EAT "ARGV[3] Value: Max = INT_MAX && MIN = 60."
+# define VALUE_SLEEP "ARGV[4] Value: Max = INT_MAX && MIN = 60."
+# define VALUE_MUST_EAT "ARGV[5] Value: Max = INT_MAX && MIN = 1."
 
 //----------| MAIN STRUCT |----------//
 typedef struct s_philo
 {
-	int	nb_philo;
-	int	to_die;
-	int	to_eat;
-	int	to_sleep;
-	int	must_eat;
+	int		nb_philo;
+	int		to_die;
+	int		to_eat;
+	int		to_sleep;
+	int		must_eat;
+	pthread_t	thread;
 }	t_philo;
 
 //----------| ARGUMENTS |----------//
@@ -53,7 +58,7 @@ int	invalid_arguments(int argc, char **argv);
 int	error_number_arguments(void);
 int	error_only_number(void);
 int	error_overflow(void);
-int	error_philosophers(void);
+int	error_start(void);
 
 //----------| COLORS |----------//
 void	paint(int color);

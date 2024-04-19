@@ -6,7 +6,7 @@
 /*   By: jazevedo <jazevedo@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/18 15:15:46 by jazevedo          #+#    #+#             */
-/*   Updated: 2024/04/18 15:40:44 by jazevedo         ###   ########.fr       */
+/*   Updated: 2024/04/19 13:35:22 by jazevedo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,5 @@ int	invalid_arguments(int argc, char **argv)
 		return (error_only_number());
 	if (!is_int(argc, argv))
 		return (error_overflow());
-	if (ft_atol(argv[1]) > 200 || ft_atol(argv[1]) < 1)
-		return (error_philosophers());
 	return (0);
 }
