@@ -6,7 +6,7 @@
 /*   By: jazevedo <jazevedo@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/17 15:41:25 by jazevedo          #+#    #+#             */
-/*   Updated: 2024/04/19 19:32:43 by jazevedo         ###   ########.fr       */
+/*   Updated: 2024/04/19 20:12:50 by jazevedo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,13 +87,13 @@ int	main(int argc, char **argv)
 	if (!start_philo(&philo, argv))
 		return (1);
 	pthread_mutex_init(&philo.mutex, NULL); // INICIAR A MUTEX.
-	pthread_t *thread = malloc(sizeof(pthread_t) * philo.nb_philo);
+	philo.thread = malloc(sizeof(pthread_t) * philo.nb_philo);
 	long i = -1;
 	while (++i < philo.nb_philo)
-		pthread_create(&thread[i], NULL, print_thread, (void *)&philo);
+		pthread_create(&(philo.thread[i]), NULL, print_thread, (void *)&philo);
 	i = -1;
 	while (++i < philo.nb_philo)
-		pthread_join(thread[i], NULL);
+		pthread_join(philo.thread[i], NULL);
 	pthread_mutex_destroy(&(philo.mutex)); // DESTRUIR MUTEX
 	return (0);
 }

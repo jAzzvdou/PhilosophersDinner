@@ -6,7 +6,7 @@
 /*   By: jazevedo <jazevedo@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/16 16:23:25 by jazevedo          #+#    #+#             */
-/*   Updated: 2024/04/19 19:25:18 by jazevedo         ###   ########.fr       */
+/*   Updated: 2024/04/19 20:11:28 by jazevedo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ typedef struct s_philo
 	int		must_eat;
 	int		tid;
 	int		color;
-	pthread_t	thread;
+	pthread_t	*thread;
 	pthread_mutex_t	mutex;
 	//t_table		*table;
 }			t_philo;
