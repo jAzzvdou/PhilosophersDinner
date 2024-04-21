@@ -16,7 +16,6 @@
 # include <unistd.h>  //| WRITE, USLEEP
 # include <stdlib.h>  //| MALLOC, FREE, NULL
 # include <pthread.h> //| THREAD's FUNCTIONS
-# include <string.h>  //| MEMSET
 # include <stdio.h>   //| PRINTF
 
 # define RED	1
@@ -40,33 +39,48 @@
 # define VALUE_SLEEP "ARGV[4] Value: Max = INT_MAX && MIN = 60."
 # define VALUE_MUST_EAT "ARGV[5] Value: Max = INT_MAX && MIN = 1."
 
-//----------| PHILOSOPHERS STRUCT |----------//
-/*
-typedef struct s_table
+//----------| INFOS STRUCT |----------//
+typedef struct s_infos
 {
-	int	id;
-	int	fork;
-	int	eaten;
-	s_table	*next;
-}		t_table;
-*/
-//----------| MAIN STRUCT |----------//
+	int	philos;
+	int	to_die;
+	int	to_eat;
+	int	to_sleep;
+	int	must_eat;
+}	t_infos;
+
+//----------| MUTEXES STRUCT |----------//
+typedef struct s_mutexes
+{
+	int		stop;
+	int		eaten;
+	pthread_mutex_t	mutex_stop;
+	pthread_mutex_t	mutex_eaten;
+	pthread_mutex_t	mutex_print;
+}	t_mutexes;
+
+//----------| PHILOSOPHERS STRUCT |----------//
 typedef struct s_philo
 {
-	int		nb_philo;
-	int		to_die;
-	int		to_eat;
-	int		to_sleep;
-	int		must_eat;
 	int		tid;
+	int		fork;
 	int		color;
-	pthread_t	*thread;
-	pthread_mutex_t	mutex;
-	//t_table		*table;
-}			t_philo;
+	int		start;
+	int		death;
+	t_infos		infos;
+	t_mutexes	*mutexes;
+	pthread_mutex_t	mutex_fork;
+	struct s_philo	*next;
+}	t_philo;
 
 //----------| ARGUMENTS |----------//
 int	invalid_arguments(int argc, char **argv);
+
+//----------| STARTERS |----------//
+int	start_infos(t_infos *infos, char **argv);
+void	start_mutexes(t_infos *infos, t_mutexes *mutexes);
+int	start_threads(t_infos *infos, t_mutexes *mutexes);
+t_philo	*start_philos(t_infos *infos, t_mutexes *mutexes);
 
 //----------| ERRORS |----------//
 int	error_number_arguments(void);
@@ -76,6 +90,7 @@ int	error_start(void);
 
 //----------| COLORS |----------//
 void	paint(int color);
+int	make_color(int c, int min, int max);
 
 //----------| UTILS |----------//
 size_t	ft_strlen(const char *str);

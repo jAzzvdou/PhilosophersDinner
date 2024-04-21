@@ -31,3 +31,32 @@ void	paint(int color)
 	else if (color == CLEAR)
 		printf("\033[H\033[J");
 }
+
+int     make_color(int c, int min, int max)
+{
+        int             red;
+        int             green;
+        int             blue;
+        float   calc;
+
+        if (c == 0)
+                return (0x00FF00);
+        else if (c > 0 && c <= max)
+        {
+                calc = (float)c / max;
+                red = 255 * calc;
+                green = 255 - red;
+                blue = 0;
+                return ((red << 16) | (green << 8) | blue);
+        }
+        else if (c < 0 && c >= min)
+        {
+                calc = (float)c / min;
+                blue = 255 * calc;
+                green = 255 - blue;
+                red = 0;
+                return ((red << 16) | (green << 8) | blue);
+        }
+        else
+                return (0x000000);
+}
