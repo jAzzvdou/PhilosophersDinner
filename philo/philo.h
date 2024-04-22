@@ -6,7 +6,7 @@
 /*   By: jazevedo <jazevedo@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/16 16:23:25 by jazevedo          #+#    #+#             */
-/*   Updated: 2024/04/19 20:11:28 by jazevedo         ###   ########.fr       */
+/*   Updated: 2024/04/22 14:53:51 by jazevedo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,13 +47,14 @@ typedef struct s_infos
 	int	to_eat;
 	int	to_sleep;
 	int	must_eat;
+	int	colors;
 }	t_infos;
 
 //----------| MUTEXES STRUCT |----------//
 typedef struct s_mutexes
 {
-	int		stop;
-	int		eaten;
+	int				stop;
+	int				eaten;
 	pthread_mutex_t	mutex_stop;
 	pthread_mutex_t	mutex_eaten;
 	pthread_mutex_t	mutex_print;
@@ -62,35 +63,35 @@ typedef struct s_mutexes
 //----------| PHILOSOPHERS STRUCT |----------//
 typedef struct s_philo
 {
-	int		tid;
-	int		fork;
-	int		color;
-	int		start;
-	int		death;
-	t_infos		infos;
-	t_mutexes	*mutexes;
+	int				tid;
+	int				fork;
+	int				color;
+	int				start;
+	int				death;
+	t_infos			infos;
+	t_mutexes		*mutexes;
 	pthread_mutex_t	mutex_fork;
 	struct s_philo	*next;
 }	t_philo;
 
 //----------| ARGUMENTS |----------//
-int	invalid_arguments(int argc, char **argv);
+int		invalid_arguments(int argc, char **argv);
 
 //----------| STARTERS |----------//
-int	start_infos(t_infos *infos, char **argv);
+int		start_infos(t_infos *infos, char **argv);
 void	start_mutexes(t_infos *infos, t_mutexes *mutexes);
-int	start_threads(t_infos *infos, t_mutexes *mutexes);
+int		start_threads(t_infos *infos, t_mutexes *mutexes);
 t_philo	*start_philos(t_infos *infos, t_mutexes *mutexes);
 
 //----------| ERRORS |----------//
-int	error_number_arguments(void);
-int	error_only_number(void);
-int	error_overflow(void);
-int	error_start(void);
+int		error_number_arguments(void);
+int		error_only_number(void);
+int		error_overflow(void);
+int		error_start(void);
 
 //----------| COLORS |----------//
 void	paint(int color);
-int	make_color(int c, int min, int max);
+int		make_color(int c, int min, int max);
 
 //----------| UTILS |----------//
 size_t	ft_strlen(const char *str);

@@ -1,9 +1,21 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   starters.c                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jazevedo <jazevedo@student.42.rio>         +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/04/22 14:04:29 by jazevedo          #+#    #+#             */
+/*   Updated: 2024/04/22 14:47:16 by jazevedo         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "philo.h"
 
 int	start_infos(t_infos *infos, char **argv)
 {
 	infos->philos = ft_atol(argv[1]);
-	infos->color = -((infos->nb_infos) / 2);
+	infos->colors = -((infos->philos) / 2);
 	infos->to_die = ft_atol(argv[2]);
 	infos->to_eat = ft_atol(argv[3]);
 	infos->to_sleep = ft_atol(argv[4]);
@@ -11,9 +23,9 @@ int	start_infos(t_infos *infos, char **argv)
 		infos->must_eat = ft_atol(argv[5]);
 	else
 		infos->must_eat = -1;
-	if (!infos->nb_infos || infos->nb_infos > 200
-			|| infos->to_die < 60 || infos->to_eat < 60
-			|| infos->to_sleep < 60 || !infos->must_eat)
+	if (!infos->philos || infos->philos > 200
+		|| infos->to_die < 60 || infos->to_eat < 60
+		|| infos->to_sleep < 60 || !infos->must_eat)
 		return (error_start());
 	return (1);
 }
@@ -28,22 +40,28 @@ void	start_mutexes(t_infos *infos, t_mutexes *mutexes)
 
 t_philo	*start_philos(t_infos *infos, t_mutexes *mutexes)
 {
-	int     i;
-	t_philo *philo;
+	int		i;
+	int		color;
+	t_philo	*philo;
 
 	philo = NULL;
 	i = -1;
 	while (++i < infos->philos)
-		add_on_table(&philo, new_philo(infos, mutexes, i + 1));
+	{
+		color = make_color(infos->colors, -(infos->philos / 2),
+				(infos->philos / 2));
+		add_on_table(&philo, new_philo(infos, mutexes, i + 1, color));
+		infos->colors++;
+	}
 	last_philo(philo)->next = philo;
 	return (philo);
 }
 
 int	start_threads(t_infos *infos, t_mutexes *mutexes)
 {
-	int             i;
-	t_philo         *philo;
-	pthread_t       *philos;
+	int			i;
+	t_philo		*philo;
+	pthread_t	*philos;
 
 	philo = start_philos(infos, mutexes);
 	philos = malloc(sizeof(pthread_t) * infos->philos);
