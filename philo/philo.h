@@ -6,7 +6,7 @@
 /*   By: jazevedo <jazevedo@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/16 16:23:25 by jazevedo          #+#    #+#             */
-/*   Updated: 2024/04/22 14:53:51 by jazevedo         ###   ########.fr       */
+/*   Updated: 2024/04/22 17:58:05 by jazevedo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,6 +82,14 @@ int		start_infos(t_infos *infos, char **argv);
 void	start_mutexes(t_infos *infos, t_mutexes *mutexes);
 int		start_threads(t_infos *infos, t_mutexes *mutexes);
 t_philo	*start_philos(t_infos *infos, t_mutexes *mutexes);
+
+//----------| PHILOSOPHERS |----------//
+void	add_on_table(t_philo **philo, t_philo *new_philo);
+t_philo	*new_philo(t_infos *infos, t_mutexes *mutexes, int tid);
+t_philo	*last_philo(t_philo *philo);
+
+//----------| ROUTINE |----------//
+void	*routine(void *philo);
 
 //----------| ERRORS |----------//
 int		error_number_arguments(void);

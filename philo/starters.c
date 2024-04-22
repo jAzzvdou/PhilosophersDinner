@@ -6,7 +6,7 @@
 /*   By: jazevedo <jazevedo@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/22 14:04:29 by jazevedo          #+#    #+#             */
-/*   Updated: 2024/04/22 14:47:16 by jazevedo         ###   ########.fr       */
+/*   Updated: 2024/04/22 18:00:18 by jazevedo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,18 +41,12 @@ void	start_mutexes(t_infos *infos, t_mutexes *mutexes)
 t_philo	*start_philos(t_infos *infos, t_mutexes *mutexes)
 {
 	int		i;
-	int		color;
 	t_philo	*philo;
 
 	philo = NULL;
 	i = -1;
 	while (++i < infos->philos)
-	{
-		color = make_color(infos->colors, -(infos->philos / 2),
-				(infos->philos / 2));
-		add_on_table(&philo, new_philo(infos, mutexes, i + 1, color));
-		infos->colors++;
-	}
+		add_on_table(&philo, new_philo(infos, mutexes, i + 1));
 	last_philo(philo)->next = philo;
 	return (philo);
 }
@@ -77,6 +71,6 @@ int	start_threads(t_infos *infos, t_mutexes *mutexes)
 	while (++i < infos->philos)
 		pthread_join(philos[i], NULL);
 	free(philos);
-	cleaner(mutexes, philo);
+	//cleaner(mutexes, philo);
 	return (1);
 }

@@ -6,11 +6,11 @@
 /*   By: jazevedo <jazevedo@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/17 15:41:25 by jazevedo          #+#    #+#             */
-/*   Updated: 2024/04/19 20:12:50 by jazevedo         ###   ########.fr       */
+/*   Updated: 2024/04/22 17:40:19 by jazevedo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "infos.h"
+#include "philo.h"
 
 int	main(int argc, char **argv)
 {

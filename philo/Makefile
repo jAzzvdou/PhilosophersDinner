@@ -7,6 +7,8 @@ SRCS	=	main.c             \
 		errors.c           \
 		color.c            \
 		starters.c         \
+		routine.c          \
+		philo_utils.c      \
 		utils.c
 
 SRCS_BONUS	=	
