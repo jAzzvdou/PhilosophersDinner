@@ -8,6 +8,7 @@ SRCS	=	main.c             \
 		color.c            \
 		starters.c         \
 		routine.c          \
+		eat.c              \
 		philo_utils.c      \
 		utils.c
 

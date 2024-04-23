@@ -6,7 +6,7 @@
 /*   By: jazevedo <jazevedo@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/22 15:05:06 by jazevedo          #+#    #+#             */
-/*   Updated: 2024/04/23 12:05:17 by jazevedo         ###   ########.fr       */
+/*   Updated: 2024/04/23 12:12:12 by jazevedo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,10 +66,10 @@ void	*routine(void *thread)
 		if (!eat_pls(philo))
 			return (NULL);
 		return_forks(philo);
-		if (!have_eaten(philo)) // FAZER.
+		/*if (!have_eaten(philo)) // FAZER.
 			return (NULL);
 		if (!sleep_pls(philo)) // FAZER.
-			return (NULL);
+			return (NULL);*/
 	}
 	return (NULL);
 }

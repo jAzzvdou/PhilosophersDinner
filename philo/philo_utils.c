@@ -6,7 +6,7 @@
 /*   By: jazevedo <jazevedo@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/22 14:04:24 by jazevedo          #+#    #+#             */
-/*   Updated: 2024/04/23 10:24:13 by jazevedo         ###   ########.fr       */
+/*   Updated: 2024/04/23 12:15:42 by jazevedo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ t_philo	*new_philo(t_infos *infos, t_mutexes *mutexes, int tid)
 			(infos->philos / 2));
 	infos->colors++;
 	philo->fork = 1;
-	philo->start = 0;
+	philo->eaten = 0;
 	philo->death = 0;
 	philo->infos = *infos;
 	philo->mutexes = mutexes;

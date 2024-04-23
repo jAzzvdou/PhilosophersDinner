@@ -6,7 +6,7 @@
 /*   By: jazevedo <jazevedo@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/16 16:23:25 by jazevedo          #+#    #+#             */
-/*   Updated: 2024/04/23 12:09:03 by jazevedo         ###   ########.fr       */
+/*   Updated: 2024/04/23 12:14:41 by jazevedo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,7 @@ typedef struct s_philo
 	int				tid;
 	int				fork;
 	int				color;
+	int				eaten;
 	long			start;
 	long			death;
 	t_infos			infos;

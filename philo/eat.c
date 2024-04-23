@@ -6,11 +6,25 @@
 /*   By: jazevedo <jazevedo@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/23 12:02:30 by jazevedo          #+#    #+#             */
-/*   Updated: 2024/04/23 12:02:47 by jazevedo         ###   ########.fr       */
+/*   Updated: 2024/04/23 12:18:43 by jazevedo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
+
+int	waiting(t_philo *philo, long timer)
+{
+	long	final;
+
+	final = milisecond() + timer;
+	while (final > milisecond())
+	{
+		if (is_dead(philo))
+			return (0);
+		usleep(500);
+	}
+	return (1);
+}
 
 int	single_fork(t_philo *philo, t_philo *fork, char *message)
 {
@@ -48,7 +62,7 @@ int	eat_pls(t_philo *philo)
 	print_action(philo, "is eating..");
 	philo->death = milisecond() + philo->infos.to_die;
 	philo->eaten++;
-	return (waiting(philo, philo->info.to_eat));
+	return (waiting(philo, philo->infos.to_eat));
 }
 
 void	return_forks(t_philo *philo)
