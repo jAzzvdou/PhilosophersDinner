@@ -6,7 +6,7 @@
 /*   By: jazevedo <jazevedo@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/22 14:04:24 by jazevedo          #+#    #+#             */
-/*   Updated: 2024/04/22 18:19:06 by jazevedo         ###   ########.fr       */
+/*   Updated: 2024/04/23 10:24:13 by jazevedo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,8 @@ t_philo	*new_philo(t_infos *infos, t_mutexes *mutexes, int tid)
 
 	philo = malloc(sizeof(t_philo));
 	philo->tid = tid;
-	philo->color = make_color(infos->colors, -(infos->philos / 2), (infos->philos / 2));
+	philo->color = make_color(infos->colors, -(infos->philos / 2),
+			(infos->philos / 2));
 	infos->colors++;
 	philo->fork = 1;
 	philo->start = 0;

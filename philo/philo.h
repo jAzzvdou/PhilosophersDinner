@@ -6,17 +6,18 @@
 /*   By: jazevedo <jazevedo@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/16 16:23:25 by jazevedo          #+#    #+#             */
-/*   Updated: 2024/04/22 17:58:05 by jazevedo         ###   ########.fr       */
+/*   Updated: 2024/04/23 12:09:03 by jazevedo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PHILO_H
 # define PHILO_H
 
-# include <unistd.h>  //| WRITE, USLEEP
-# include <stdlib.h>  //| MALLOC, FREE, NULL
-# include <pthread.h> //| THREAD's FUNCTIONS
-# include <stdio.h>   //| PRINTF
+# include <unistd.h>   //| WRITE, USLEEP
+# include <stdlib.h>   //| MALLOC, FREE, NULL
+# include <pthread.h>  //| THREAD's FUNCTIONS
+# include <stdio.h>    //| PRINTF
+# include <sys/time.h> //| GETTIMEOFDAY
 
 # define RED	1
 # define GREEN	2
@@ -66,8 +67,8 @@ typedef struct s_philo
 	int				tid;
 	int				fork;
 	int				color;
-	int				start;
-	int				death;
+	long			start;
+	long			death;
 	t_infos			infos;
 	t_mutexes		*mutexes;
 	pthread_mutex_t	mutex_fork;
@@ -89,6 +90,11 @@ t_philo	*new_philo(t_infos *infos, t_mutexes *mutexes, int tid);
 t_philo	*last_philo(t_philo *philo);
 
 //----------| ROUTINE |----------//
+long	milisecond(void);
+void	print_action(t_philo *philo, char *message);
+int		is_dead(t_philo *philo);
+int		eat_pls(t_philo *philo);
+void	return_forks(t_philo *philo);
 void	*routine(void *philo);
 
 //----------| ERRORS |----------//
