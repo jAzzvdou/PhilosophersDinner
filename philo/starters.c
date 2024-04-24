@@ -6,7 +6,7 @@
 /*   By: jazevedo <jazevedo@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/22 14:04:29 by jazevedo          #+#    #+#             */
-/*   Updated: 2024/04/22 18:00:18 by jazevedo         ###   ########.fr       */
+/*   Updated: 2024/04/24 13:45:25 by jazevedo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,6 +71,6 @@ int	start_threads(t_infos *infos, t_mutexes *mutexes)
 	while (++i < infos->philos)
 		pthread_join(philos[i], NULL);
 	free(philos);
-	//cleaner(mutexes, philo);
+	cleaner(philo, mutexes);
 	return (1);
 }

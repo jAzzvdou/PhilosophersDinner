@@ -1,7 +1,5 @@
 NAME	=	philo
 
-NAME_BONUS	=	philo_bonus
-
 SRCS	=	main.c             \
 		verify_arguments.c \
 		errors.c           \
@@ -9,14 +7,12 @@ SRCS	=	main.c             \
 		starters.c         \
 		routine.c          \
 		eat.c              \
+		sleep.c            \
+		cleaner.c          \
 		philo_utils.c      \
 		utils.c
 
-SRCS_BONUS	=	
-
 OBJS	=	$(SRCS:.c=.o)
-
-OBJS_BONUS	=	$(SRCS_BONUS:.c=.o)
 
 CC	=	cc
 
@@ -29,20 +25,17 @@ all: $(NAME)
 $(NAME): $(OBJS)
 		$(CC) -o $(NAME) $(OBJS)
 
-$(NAME_BONUS): $(OBJS_BONUS)
-		$(CC) -o $(NAME_BONUS) $(OBJS_BONUS)
-
 .c.o:
 		$(CC) $(CFLAGS) -c $<
 
 clean:
-		$(RM) $(OBJS) $(OBJS_BONUS)
+		$(RM) $(OBJS)
 
 fclean: clean
-	$(RM) $(NAME) $(NAME_BONUS)
+	$(RM) $(NAME)
 
 re: fclean all
 
 bonus: $(NAME_BONUS)
 
-.PHONY: all clean fclean re bonus
+.PHONY: all clean fclean re

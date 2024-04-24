@@ -6,7 +6,7 @@
 /*   By: jazevedo <jazevedo@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/22 15:05:06 by jazevedo          #+#    #+#             */
-/*   Updated: 2024/04/23 23:56:34 by jazevedo         ###   ########.fr       */
+/*   Updated: 2024/04/24 13:56:01 by jazevedo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,12 +63,6 @@ int	is_dead(t_philo *philo)
 		return (pthread_mutex_unlock(&philo->mutexes->mutex_stop), 1);
 	}
 	return (pthread_mutex_unlock(&philo->mutexes->mutex_stop), 0);
-}
-
-int	sleep_pls(t_philo *philo)
-{
-	print_action(philo, "is sleeping..");
-	return (waiting(philo, philo->infos.to_sleep));
 }
 
 void	*routine(void *thread)
