@@ -6,7 +6,7 @@
 /*   By: jazevedo <jazevedo@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/22 15:05:06 by jazevedo          #+#    #+#             */
-/*   Updated: 2024/04/23 12:12:12 by jazevedo         ###   ########.fr       */
+/*   Updated: 2024/04/23 23:56:34 by jazevedo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,20 @@ long	milisecond(void)
 
 	gettimeofday(&time, NULL);
 	return ((time.tv_sec * 1000) + (time.tv_usec / 1000));
+}
+
+int	waiting(t_philo *philo, long timer)
+{
+	long	final;
+
+	final = milisecond() + timer;
+	while (final > milisecond())
+	{
+		if (is_dead(philo))
+			return (0);
+		usleep(500);
+	}
+	return (1);
 }
 
 void	print_action(t_philo *philo, char *message)
@@ -43,12 +57,18 @@ int	is_dead(t_philo *philo)
 		philo->mutexes->stop = 1;
 		pthread_mutex_lock(&philo->mutexes->mutex_print);
 		printf("\033[38;2;%d;%d;%dmPhilosopher[%d] dead. TIME: %ld.\n",
-			128, 128, 128,
+			102, 102, 102,
 			philo->tid, milisecond() - philo->start);
 		pthread_mutex_unlock(&philo->mutexes->mutex_print);
 		return (pthread_mutex_unlock(&philo->mutexes->mutex_stop), 1);
 	}
 	return (pthread_mutex_unlock(&philo->mutexes->mutex_stop), 0);
+}
+
+int	sleep_pls(t_philo *philo)
+{
+	print_action(philo, "is sleeping..");
+	return (waiting(philo, philo->infos.to_sleep));
 }
 
 void	*routine(void *thread)
@@ -66,10 +86,10 @@ void	*routine(void *thread)
 		if (!eat_pls(philo))
 			return (NULL);
 		return_forks(philo);
-		/*if (!have_eaten(philo)) // FAZER.
+		if (!have_eaten(philo))
 			return (NULL);
-		if (!sleep_pls(philo)) // FAZER.
-			return (NULL);*/
+		if (!sleep_pls(philo))
+			return (NULL);
 	}
 	return (NULL);
 }

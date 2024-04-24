@@ -6,25 +6,11 @@
 /*   By: jazevedo <jazevedo@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/23 12:02:30 by jazevedo          #+#    #+#             */
-/*   Updated: 2024/04/23 12:18:43 by jazevedo         ###   ########.fr       */
+/*   Updated: 2024/04/23 23:48:16 by jazevedo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
-
-int	waiting(t_philo *philo, long timer)
-{
-	long	final;
-
-	final = milisecond() + timer;
-	while (final > milisecond())
-	{
-		if (is_dead(philo))
-			return (0);
-		usleep(500);
-	}
-	return (1);
-}
 
 int	single_fork(t_philo *philo, t_philo *fork, char *message)
 {
@@ -73,4 +59,25 @@ void	return_forks(t_philo *philo)
 	pthread_mutex_lock(&philo->next->mutex_fork);
 	philo->next->fork++;
 	pthread_mutex_unlock(&philo->next->mutex_fork);
+}
+
+int	have_eaten(t_philo *philo)
+{
+	pthread_mutex_lock(&philo->mutexes->mutex_eaten);
+	if (philo->eaten == philo->infos.must_eat)
+	{
+		philo->mutexes->eaten--;
+		if (!philo->mutexes->eaten)
+		{
+			pthread_mutex_unlock(&philo->mutexes->mutex_eaten);
+			pthread_mutex_lock(&philo->mutexes->mutex_stop);
+			philo->mutexes->stop++;
+			pthread_mutex_unlock(&philo->mutexes->mutex_stop);
+		}
+		else
+			pthread_mutex_unlock(&philo->mutexes->mutex_eaten);
+		return (0);
+	}
+	pthread_mutex_unlock(&philo->mutexes->mutex_eaten);
+	return (1);
 }
