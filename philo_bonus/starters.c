@@ -6,7 +6,7 @@
 /*   By: jazevedo <jazevedo@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/29 22:05:41 by jazevedo          #+#    #+#             */
-/*   Updated: 2024/04/30 11:24:35 by jazevedo         ###   ########.fr       */
+/*   Updated: 2024/04/30 15:31:50 by jazevedo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,10 +60,10 @@ int	can_exit(int philos)
 	{
 		waitpid(0, &status, 0);
 		if (WEXITSTATUS(status) == 1)
-			return (0);
+			return (1);
 		i++;
 	}
-	return (1);
+	return (0);
 }
 
 int	start_processes(t_philo *philo)

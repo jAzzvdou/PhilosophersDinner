@@ -6,7 +6,7 @@
 /*   By: jazevedo <jazevedo@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/30 09:04:08 by jazevedo          #+#    #+#             */
-/*   Updated: 2024/04/30 11:25:30 by jazevedo         ###   ########.fr       */
+/*   Updated: 2024/04/30 15:34:18 by jazevedo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,9 @@ void	*is_dead(void *process)
 				"died", milisecond() - philo->start);
 			exit(1);
 		}
-		usleep(100);
+		else
+			pthread_mutex_unlock(&philo->mutex_death);
+		usleep(500);
 	}
 	return (NULL);
 }
