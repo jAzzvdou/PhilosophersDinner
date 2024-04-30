@@ -6,7 +6,7 @@
 /*   By: jazevedo <jazevedo@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/16 16:23:25 by jazevedo          #+#    #+#             */
-/*   Updated: 2024/04/24 13:55:50 by jazevedo         ###   ########.fr       */
+/*   Updated: 2024/04/30 09:14:46 by jazevedo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,7 @@
 # define VALUE_EAT "ARGV[3] Value: Max = INT_MAX && MIN = 60."
 # define VALUE_SLEEP "ARGV[4] Value: Max = INT_MAX && MIN = 60."
 # define VALUE_MUST_EAT "ARGV[5] Value: Max = INT_MAX && MIN = 1."
+# define PHILO_ACTION "\033[38;2;%d;%d;%dmPhilosopher[%d] %s. TIME: %ld.\n"
 
 //----------| INFOS STRUCT |----------//
 typedef struct s_infos

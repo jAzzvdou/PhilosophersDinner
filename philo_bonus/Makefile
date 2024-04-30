@@ -1,4 +1,4 @@
-NAME	=	philo
+NAME	=	philo_bonus
 
 SRCS	=	main.c             \
 		verify_arguments.c \
@@ -6,10 +6,6 @@ SRCS	=	main.c             \
 		color.c            \
 		starters.c         \
 		routine.c          \
-		eat.c              \
-		sleep.c            \
-		cleaner.c          \
-		philo_utils.c      \
 		utils.c
 
 OBJS	=	$(SRCS:.c=.o)

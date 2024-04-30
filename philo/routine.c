@@ -6,7 +6,7 @@
 /*   By: jazevedo <jazevedo@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/22 15:05:06 by jazevedo          #+#    #+#             */
-/*   Updated: 2024/04/24 13:56:01 by jazevedo         ###   ########.fr       */
+/*   Updated: 2024/04/30 09:17:50 by jazevedo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ void	print_action(t_philo *philo, char *message)
 	if (is_dead(philo))
 		return ;
 	pthread_mutex_lock(&philo->mutexes->mutex_print);
-	printf("\033[38;2;%d;%d;%dmPhilosopher[%d] %s. TIME: %ld.\n",
+	printf(PHILO_ACTION,
 		(philo->color >> 16) & 0xFF,
 		(philo->color >> 8) & 0xFF,
 		philo->color & 0xFF, philo->tid, message,
@@ -56,9 +56,9 @@ int	is_dead(t_philo *philo)
 	{
 		philo->mutexes->stop = 1;
 		pthread_mutex_lock(&philo->mutexes->mutex_print);
-		printf("\033[38;2;%d;%d;%dmPhilosopher[%d] dead. TIME: %ld.\n",
+		printf(PHILO_ACTION,
 			102, 102, 102,
-			philo->tid, milisecond() - philo->start);
+			philo->tid, "died", milisecond() - philo->start);
 		pthread_mutex_unlock(&philo->mutexes->mutex_print);
 		return (pthread_mutex_unlock(&philo->mutexes->mutex_stop), 1);
 	}
