@@ -6,7 +6,7 @@
 /*   By: jazevedo <jazevedo@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/29 21:21:33 by jazevedo          #+#    #+#             */
-/*   Updated: 2024/04/30 09:40:59 by jazevedo         ###   ########.fr       */
+/*   Updated: 2024/04/30 11:25:52 by jazevedo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,10 +18,10 @@
 # include <pthread.h>   //| THREAD's FUNCTIONS
 # include <stdio.h>     //| PRINTF
 # include <sys/time.h>  //| GETTIMEOFDAY
-# include <sys/wait.h>  //|
+# include <sys/wait.h>  //| WAITPID
 # include <fcntl.h>     //| PERMISSIONS
-# include <semaphore.h> //| SEM_T
-# include <signal.h>
+# include <semaphore.h> //| SEM_T, SEM_UNLINK, SEM_OPEN, SEM_CLOSE
+# include <signal.h>    //| MACROS
 
 # define RED    1
 # define GREEN  2
@@ -51,6 +51,7 @@ typedef struct s_philo
 	int				philos;
 	int				tid;
 	int				color;
+	int				*colors;
 	int				eaten;
 	int				must_eat;
 	long			start;
@@ -88,6 +89,7 @@ int		error_start(void);
 //----------| COLORS |----------//
 void	paint(int color);
 int		make_color(int c, int min, int max);
+int		*get_colors(int philos);
 
 //----------| UTILS |----------//
 size_t	ft_strlen(const char *str);

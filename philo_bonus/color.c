@@ -6,7 +6,7 @@
 /*   By: jazevedo <jazevedo@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/29 21:17:42 by jazevedo          #+#    #+#             */
-/*   Updated: 2024/04/30 09:26:52 by jazevedo         ###   ########.fr       */
+/*   Updated: 2024/04/30 10:33:07 by jazevedo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,4 +59,20 @@ int	make_color(int c, int min, int max)
 	}
 	else
 		return (0x000000);
+}
+
+int	*get_colors(int philos)
+{
+	int	i;
+	int	color;
+	int	*colors;
+
+	colors = malloc(sizeof(int) * philos);
+	if (!colors)
+		return (NULL);
+	color = -(philos / 2);
+	i = -1;
+	while (++i < philos)
+		colors[i] = make_color(color++, -(philos / 2), (philos / 2));
+	return (colors);
 }

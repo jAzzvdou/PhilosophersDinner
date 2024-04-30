@@ -6,7 +6,7 @@
 /*   By: jazevedo <jazevedo@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/30 09:04:08 by jazevedo          #+#    #+#             */
-/*   Updated: 2024/04/30 09:41:25 by jazevedo         ###   ########.fr       */
+/*   Updated: 2024/04/30 11:25:30 by jazevedo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,9 +83,13 @@ int	routine(t_philo *philo)
 		print_action(philo, "is thinking..");
 		eat_pls(philo);
 		if (philo->eaten == philo->must_eat)
+		{
+			free(philo->colors);
 			return (0);
+		}
 		print_action(philo, "is sleeping..");
 		usleep(philo->to_sleep * 1000);
 	}
+	free(philo->colors);
 	return (1);
 }

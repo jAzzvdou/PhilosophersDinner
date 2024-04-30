@@ -6,7 +6,7 @@
 /*   By: jazevedo <jazevedo@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/29 22:05:41 by jazevedo          #+#    #+#             */
-/*   Updated: 2024/04/30 09:39:24 by jazevedo         ###   ########.fr       */
+/*   Updated: 2024/04/30 11:24:35 by jazevedo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 int	start_philo(t_philo *philo, char **argv)
 {
 	philo->philos = ft_atol(argv[1]);
-	philo->color = -((philo->philos) / 2);
+	philo->colors = get_colors(philo->philos);
 	philo->to_die = ft_atol(argv[2]);
 	philo->to_eat = ft_atol(argv[3]);
 	philo->to_sleep = ft_atol(argv[4]);
@@ -80,7 +80,8 @@ int	start_processes(t_philo *philo)
 		if (pid[philo->tid - 1] == 0)
 		{
 			free(pid);
-			routine(philo);
+			philo->color = philo->colors[philo->tid - 1];
+			return (routine(philo));
 		}
 		philo->tid++;
 	}
