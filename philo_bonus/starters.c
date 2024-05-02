@@ -6,7 +6,7 @@
 /*   By: jazevedo <jazevedo@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/29 22:05:41 by jazevedo          #+#    #+#             */
-/*   Updated: 2024/04/30 15:31:50 by jazevedo         ###   ########.fr       */
+/*   Updated: 2024/05/02 14:47:58 by jazevedo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ int	start_philo(t_philo *philo, char **argv)
 	if (!philo->philos || philo->philos > 200
 		|| philo->to_die < 60 || philo->to_eat < 60
 		|| philo->to_sleep < 60 || !philo->must_eat)
-		return (error_start());
+		return (free(philo->colors), error_start());
 	philo->tid = 1;
 	return (1);
 }
@@ -92,5 +92,6 @@ int	start_processes(t_philo *philo)
 			kill(pid[killing], SIGTERM);
 	}
 	free(pid);
+	free(philo->colors);
 	return (1);
 }

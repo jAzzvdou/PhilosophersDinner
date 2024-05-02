@@ -6,7 +6,7 @@
 /*   By: jazevedo <jazevedo@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/30 09:04:08 by jazevedo          #+#    #+#             */
-/*   Updated: 2024/04/30 15:34:18 by jazevedo         ###   ########.fr       */
+/*   Updated: 2024/05/02 14:26:51 by jazevedo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@ void	*is_dead(void *process)
 			sem_wait(philo->sem_print);
 			printf(PHILO_ACTION, 102, 102, 102, philo->tid,
 				"died", milisecond() - philo->start);
+			free(philo->colors);
 			exit(1);
 		}
 		else
