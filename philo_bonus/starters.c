@@ -6,7 +6,7 @@
 /*   By: jazevedo <jazevedo@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/29 22:05:41 by jazevedo          #+#    #+#             */
-/*   Updated: 2024/05/02 14:47:58 by jazevedo         ###   ########.fr       */
+/*   Updated: 2024/05/03 12:56:07 by jazevedo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,8 +72,6 @@ int	start_processes(t_philo *philo)
 	int	*pid;
 
 	pid = malloc(sizeof(int) * philo->philos);
-	if (!pid)
-		return (0);
 	while (philo->tid <= philo->philos)
 	{
 		pid[philo->tid - 1] = fork();
@@ -89,7 +87,7 @@ int	start_processes(t_philo *philo)
 	if (can_exit(philo->philos))
 	{
 		while (killing--)
-			kill(pid[killing], SIGTERM);
+			kill(pid[killing], SIGKILL);
 	}
 	free(pid);
 	free(philo->colors);
