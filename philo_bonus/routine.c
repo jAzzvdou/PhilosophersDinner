@@ -6,7 +6,7 @@
 /*   By: jazevedo <jazevedo@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/30 09:04:08 by jazevedo          #+#    #+#             */
-/*   Updated: 2024/05/02 14:26:51 by jazevedo         ###   ########.fr       */
+/*   Updated: 2024/05/07 15:21:11 by jazevedo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,13 +72,13 @@ void	eat_pls(t_philo *philo)
 
 int	routine(t_philo *philo)
 {
-	pthread_t	unknown;
+	pthread_t	griffon;
 
 	pthread_mutex_init(&philo->mutex_death, NULL);
 	philo->start = milisecond();
 	philo->death = philo->start + philo->to_die;
-	pthread_create(&unknown, NULL, &is_dead, (void *)philo);
-	pthread_detach(unknown);
+	pthread_create(&griffon, NULL, &is_dead, (void *)philo);
+	pthread_detach(griffon);
 	if (philo->tid % 2 == 0)
 		usleep(100);
 	while (1)
