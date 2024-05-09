@@ -6,7 +6,7 @@
 /*   By: jazevedo <jazevedo@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/22 15:05:06 by jazevedo          #+#    #+#             */
-/*   Updated: 2024/05/09 14:14:37 by jazevedo         ###   ########.fr       */
+/*   Updated: 2024/05/09 14:39:38 by jazevedo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,7 @@ void	*death_watcher(void *watching)
 		}
 		if (watcher->philo_ate == philo->infos.must_eat)
 			philo->philo_stop = 1;
-		usleep(100);
+		//usleep(100);
 		philo = philo->next;
 		watcher = philo;
 	}
