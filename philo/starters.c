@@ -6,7 +6,7 @@
 /*   By: jazevedo <jazevedo@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/22 14:04:29 by jazevedo          #+#    #+#             */
-/*   Updated: 2024/04/24 13:45:25 by jazevedo         ###   ########.fr       */
+/*   Updated: 2024/05/09 14:10:46 by jazevedo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,11 +56,12 @@ int	start_threads(t_infos *infos, t_mutexes *mutexes)
 	int			i;
 	t_philo		*philo;
 	pthread_t	*philos;
+	pthread_t	watcher;
 
 	philo = start_philos(infos, mutexes);
 	philos = malloc(sizeof(pthread_t) * infos->philos);
-	if (!philos)
-		return (0);
+	pthread_create(&watcher, NULL, &death_watcher, (void *)philo);
+	pthread_detach(watcher);
 	i = -1;
 	while (++i < infos->philos)
 	{

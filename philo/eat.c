@@ -6,7 +6,7 @@
 /*   By: jazevedo <jazevedo@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/23 12:02:30 by jazevedo          #+#    #+#             */
-/*   Updated: 2024/04/23 23:48:16 by jazevedo         ###   ########.fr       */
+/*   Updated: 2024/05/09 13:56:57 by jazevedo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ int	have_eaten(t_philo *philo)
 		{
 			pthread_mutex_unlock(&philo->mutexes->mutex_eaten);
 			pthread_mutex_lock(&philo->mutexes->mutex_stop);
-			philo->mutexes->stop++;
+			philo->philo_ate = 1;
 			pthread_mutex_unlock(&philo->mutexes->mutex_stop);
 		}
 		else

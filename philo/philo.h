@@ -6,7 +6,7 @@
 /*   By: jazevedo <jazevedo@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/16 16:23:25 by jazevedo          #+#    #+#             */
-/*   Updated: 2024/04/30 09:14:46 by jazevedo         ###   ########.fr       */
+/*   Updated: 2024/05/09 14:11:33 by jazevedo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,6 +69,9 @@ typedef struct s_philo
 	int				fork;
 	int				color;
 	int				eaten;
+	int				philo_ate;
+	int				philo_died;
+	int				philo_stop;
 	long			start;
 	long			death;
 	t_infos			infos;
@@ -101,6 +104,7 @@ int		sleep_pls(t_philo *philo);
 void	return_forks(t_philo *philo);
 int		have_eaten(t_philo *philo);
 void	*routine(void *philo);
+void	*death_watcher(void *watching);
 
 //----------| CLEANER |----------//
 void	clear_philos(t_philo *philo);

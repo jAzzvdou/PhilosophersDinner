@@ -6,7 +6,7 @@
 /*   By: jazevedo <jazevedo@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/22 15:05:06 by jazevedo          #+#    #+#             */
-/*   Updated: 2024/04/30 09:17:50 by jazevedo         ###   ########.fr       */
+/*   Updated: 2024/05/09 14:14:37 by jazevedo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ int	waiting(t_philo *philo, long timer)
 
 void	print_action(t_philo *philo, char *message)
 {
-	if (is_dead(philo))
+	if (is_dead(philo) || philo->philo_stop)
 		return ;
 	pthread_mutex_lock(&philo->mutexes->mutex_print);
 	printf(PHILO_ACTION,
@@ -54,15 +54,38 @@ int	is_dead(t_philo *philo)
 		return (pthread_mutex_unlock(&philo->mutexes->mutex_stop), 1);
 	if (philo->death <= milisecond())
 	{
-		philo->mutexes->stop = 1;
-		pthread_mutex_lock(&philo->mutexes->mutex_print);
-		printf(PHILO_ACTION,
-			102, 102, 102,
-			philo->tid, "died", milisecond() - philo->start);
-		pthread_mutex_unlock(&philo->mutexes->mutex_print);
+		philo->philo_died = 1;
 		return (pthread_mutex_unlock(&philo->mutexes->mutex_stop), 1);
 	}
 	return (pthread_mutex_unlock(&philo->mutexes->mutex_stop), 0);
+}
+
+void	*death_watcher(void *watching)
+{
+	t_philo	*watcher;
+	t_philo	*philo;
+
+	philo = watching;
+	watcher = watching;
+	while (1)
+	{
+		if (watcher->philo_died)
+		{
+			watcher->mutexes->stop = 1;
+			pthread_mutex_lock(&watcher->mutexes->mutex_print);
+			printf(PHILO_ACTION,
+				102, 102, 102, philo->tid, "died",
+				milisecond() - philo->start);
+			pthread_mutex_unlock(&watcher->mutexes->mutex_print);
+			break ;
+		}
+		if (watcher->philo_ate == philo->infos.must_eat)
+			philo->philo_stop = 1;
+		usleep(100);
+		philo = philo->next;
+		watcher = philo;
+	}
+	return (NULL);
 }
 
 void	*routine(void *thread)
@@ -78,12 +101,12 @@ void	*routine(void *thread)
 	{
 		print_action(philo, "is thinking..");
 		if (!eat_pls(philo))
-			return (NULL);
+			break ;
 		return_forks(philo);
 		if (!have_eaten(philo))
-			return (NULL);
+			break ;
 		if (!sleep_pls(philo))
-			return (NULL);
+			break ;
 	}
 	return (NULL);
 }
