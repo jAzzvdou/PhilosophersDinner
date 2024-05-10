@@ -6,7 +6,7 @@
 /*   By: jazevedo <jazevedo@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/16 16:23:25 by jazevedo          #+#    #+#             */
-/*   Updated: 2024/05/09 14:11:33 by jazevedo         ###   ########.fr       */
+/*   Updated: 2024/05/10 13:44:19 by jazevedo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,8 +95,6 @@ t_philo	*new_philo(t_infos *infos, t_mutexes *mutexes, int tid);
 t_philo	*last_philo(t_philo *philo);
 
 //----------| ROUTINE |----------//
-long	milisecond(void);
-int		waiting(t_philo *philo, long timer);
 void	print_action(t_philo *philo, char *message);
 int		is_dead(t_philo *philo);
 int		eat_pls(t_philo *philo);
@@ -105,6 +103,10 @@ void	return_forks(t_philo *philo);
 int		have_eaten(t_philo *philo);
 void	*routine(void *philo);
 void	*death_watcher(void *watching);
+
+//----------| TIMERS |----------//
+long	milisecond(void);
+int		waiting(t_philo *philo, long timer);
 
 //----------| CLEANER |----------//
 void	clear_philos(t_philo *philo);

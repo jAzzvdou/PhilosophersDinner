@@ -5,6 +5,7 @@ SRCS	=	main.c             \
 		errors.c           \
 		color.c            \
 		starters.c         \
+		time.c             \
 		routine.c          \
 		eat.c              \
 		sleep.c            \

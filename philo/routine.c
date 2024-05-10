@@ -6,37 +6,15 @@
 /*   By: jazevedo <jazevedo@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/22 15:05:06 by jazevedo          #+#    #+#             */
-/*   Updated: 2024/05/09 14:39:38 by jazevedo         ###   ########.fr       */
+/*   Updated: 2024/05/10 13:43:19 by jazevedo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-long	milisecond(void)
-{
-	struct timeval	time;
-
-	gettimeofday(&time, NULL);
-	return ((time.tv_sec * 1000) + (time.tv_usec / 1000));
-}
-
-int	waiting(t_philo *philo, long timer)
-{
-	long	final;
-
-	final = milisecond() + timer;
-	while (final > milisecond())
-	{
-		if (is_dead(philo))
-			return (0);
-		usleep(500);
-	}
-	return (1);
-}
-
 void	print_action(t_philo *philo, char *message)
 {
-	if (is_dead(philo) || philo->philo_stop)
+	if (philo->philo_stop || is_dead(philo))
 		return ;
 	pthread_mutex_lock(&philo->mutexes->mutex_print);
 	printf(PHILO_ACTION,
@@ -81,7 +59,6 @@ void	*death_watcher(void *watching)
 		}
 		if (watcher->philo_ate == philo->infos.must_eat)
 			philo->philo_stop = 1;
-		//usleep(100);
 		philo = philo->next;
 		watcher = philo;
 	}
