@@ -6,7 +6,7 @@
 /*   By: jazevedo <jazevedo@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/22 14:04:24 by jazevedo          #+#    #+#             */
-/*   Updated: 2024/04/24 14:03:24 by jazevedo         ###   ########.fr       */
+/*   Updated: 2024/05/10 16:45:08 by jazevedo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,9 @@ t_philo	*new_philo(t_infos *infos, t_mutexes *mutexes, int tid)
 	philo->fork = 1;
 	philo->eaten = 0;
 	philo->death = 0;
+	philo->philo_ate = 0;
+	philo->philo_died = 0;
+	philo->philo_stop = 0;
 	philo->infos = *infos;
 	philo->mutexes = mutexes;
 	pthread_mutex_init(&philo->mutex_fork, NULL);
