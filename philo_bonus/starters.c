@@ -1,26 +1,14 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   starters.c                                         :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: jazevedo <jazevedo@student.42.rio>         +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/04/29 22:05:41 by jazevedo          #+#    #+#             */
-/*   Updated: 2024/05/03 12:56:07 by jazevedo         ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
 #include "philo_bonus.h"
 
 int	start_philo(t_philo *philo, char **argv)
 {
-	philo->philos = ft_atol(argv[1]);
+	philo->philos = my_atol(argv[1]);
 	philo->colors = get_colors(philo->philos);
-	philo->to_die = ft_atol(argv[2]);
-	philo->to_eat = ft_atol(argv[3]);
-	philo->to_sleep = ft_atol(argv[4]);
+	philo->to_die = my_atol(argv[2]);
+	philo->to_eat = my_atol(argv[3]);
+	philo->to_sleep = my_atol(argv[4]);
 	if (argv[5])
-		philo->must_eat = ft_atol(argv[5]);
+		philo->must_eat = my_atol(argv[5]);
 	else
 		philo->must_eat = -1;
 	if (!philo->philos || philo->philos > 200

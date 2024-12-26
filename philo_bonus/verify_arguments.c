@@ -1,15 +1,3 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   verify_arguments.c                                 :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: jazevedo <jazevedo@student.42.rio>         +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/04/29 21:13:37 by jazevedo          #+#    #+#             */
-/*   Updated: 2024/04/30 09:28:31 by jazevedo         ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
 #include "philo_bonus.h"
 
 int	is_number(int nb)
@@ -45,8 +33,8 @@ int	is_value(int argc, char **argv)
 int	is_int(int argc, char **argv)
 {
 	while (--argc > 0)
-		if (ft_strlen(argv[argc]) > 10
-			|| ft_atol(argv[argc]) > 2147483647)
+		if (my_strlen(argv[argc]) > 10
+			|| my_atol(argv[argc]) > 2147483647)
 			return (0);
 	return (1);
 }

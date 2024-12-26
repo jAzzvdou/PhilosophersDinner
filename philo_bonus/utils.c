@@ -1,18 +1,6 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   utils.c                                            :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: jazevedo <jazevedo@student.42.rio>         +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/04/29 21:14:29 by jazevedo          #+#    #+#             */
-/*   Updated: 2024/04/30 09:26:15 by jazevedo         ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
 #include "philo_bonus.h"
 
-size_t	ft_strlen(const char *str)
+size_t	my_strlen(const char *str)
 {
 	size_t	i;
 
@@ -22,7 +10,7 @@ size_t	ft_strlen(const char *str)
 	return (i);
 }
 
-long	ft_atol(const char *nptr)
+long	my_atol(const char *nptr)
 {
 	long	nb;
 	int		mult;

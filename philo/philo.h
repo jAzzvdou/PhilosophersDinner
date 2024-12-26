@@ -1,15 +1,3 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   philo.h                                            :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: jazevedo <jazevedo@student.42.rio>         +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/04/16 16:23:25 by jazevedo          #+#    #+#             */
-/*   Updated: 2024/05/10 13:44:19 by jazevedo         ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
 #ifndef PHILO_H
 # define PHILO_H
 
@@ -123,7 +111,7 @@ void	paint(int color);
 int		make_color(int c, int min, int max);
 
 //----------| UTILS |----------//
-size_t	ft_strlen(const char *str);
-long	ft_atol(const char *nptr);
+size_t	my_strlen(const char *str);
+long	my_atol(const char *nptr);
 
 #endif //| PHILOSOPHERS

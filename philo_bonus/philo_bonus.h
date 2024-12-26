@@ -1,15 +1,3 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   philo_bonus.h                                      :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: jazevedo <jazevedo@student.42.rio>         +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/04/29 21:21:33 by jazevedo          #+#    #+#             */
-/*   Updated: 2024/04/30 11:25:52 by jazevedo         ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
 #ifndef PHILO_BONUS_H
 # define PHILO_BONUS_H
 
@@ -92,7 +80,7 @@ int		make_color(int c, int min, int max);
 int		*get_colors(int philos);
 
 //----------| UTILS |----------//
-size_t	ft_strlen(const char *str);
-long	ft_atol(const char *nptr);
+size_t	my_strlen(const char *str);
+long	my_atol(const char *nptr);
 
 #endif //| PHILOSOPHERS BONUS
